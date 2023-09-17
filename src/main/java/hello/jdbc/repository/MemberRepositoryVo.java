@@ -22,6 +22,7 @@ public class MemberRepositoryVo {
             pstmt = con.prepareStatement(sql);
             pstmt.setString(1, member.getMemberId());
             pstmt.setInt(2,member.getMoney());
+            int count = pstmt.executeUpdate();
             return member;
         } catch (SQLException e) {
             throw e;
