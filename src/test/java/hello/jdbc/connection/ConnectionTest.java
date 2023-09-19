@@ -4,6 +4,7 @@ import static hello.jdbc.connection.ConnectionConst.PASSWORD;
 import static hello.jdbc.connection.ConnectionConst.URL;
 import static hello.jdbc.connection.ConnectionConst.USERNAME;
 
+import com.zaxxer.hikari.HikariDataSource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -17,7 +18,7 @@ class ConnectionTest {
 
     @Test
     void driverManager() throws SQLException {
-        Connection connection =  DriverManager.getConnection(URL, USERNAME, PASSWORD);
+        Connection connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         Connection connection2 = DriverManager.getConnection(URL, USERNAME, PASSWORD);
         log.info("connection1={}, class={}", connection, connection, getClass());
         log.info("connection22={}, class={}", connection2, connection2, getClass());
@@ -37,5 +38,18 @@ class ConnectionTest {
 
         log.info("connection={}, class={}", connection1, connection1, getClass());
         log.info("connection2={}, class={}", connection2, connection2, getClass());
+    }
+
+    @Test
+    void dataSourceConnectionPool() throws SQLException, InterruptedException {
+        HikariDataSource hikariDataSource = new HikariDataSource();
+        hikariDataSource.setJdbcUrl(URL);
+        hikariDataSource.setUsername(USERNAME);
+        hikariDataSource.setPassword(PASSWORD);
+        hikariDataSource.setMaximumPoolSize(10);
+        hikariDataSource.setPoolName("myPool");
+
+        useDataSource(hikariDataSource);
+        Thread.sleep(1000);
     }
 }
