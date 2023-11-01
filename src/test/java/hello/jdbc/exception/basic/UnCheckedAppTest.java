@@ -2,6 +2,7 @@ package hello.jdbc.exception.basic;
 
 import java.net.ConnectException;
 import java.sql.SQLException;
+import lombok.extern.slf4j.Slf4j;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 *
 *  런타임 예외의 경우에는 문서화를 잘해야한다 @throws ~~ 보통 라이브러리들은 문서화되어있다.
 * */
+@Slf4j
 public class UnCheckedAppTest {
 
     @Test
@@ -19,6 +21,17 @@ public class UnCheckedAppTest {
         Controller controller = new Controller();
         Assertions.assertThatThrownBy(()-> controller.request())
                 .isInstanceOf(Exception.class);
+    }
+
+    @Test
+    void printEx() {
+        Controller controller = new Controller();
+        try {
+            controller.request();
+        } catch (Exception e) {
+            log.info("ex", e);
+        }
+
     }
 
     static class Controller {
