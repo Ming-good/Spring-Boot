@@ -11,3 +11,9 @@
   c) 스프링 데이터 JPA, Querydsl은 JPA를 더 편리하게 사용할 수 있게 도와주는 프로젝트이다.
      실무에서는 JPA를 사용하면 이 프로젝트도 꼭! 함께사용하는 것이 좋다.
 
+[프로젝트 구조 설명2-설정]
+1. @Import는 주로 @Configration이 있는 class 파일을 bean 등록할 때 사용한다.
+2. 스프링은 로딩 시점에 application.properties의 spring.profiles.active 속성을 읽어서 프로필로 사용한다.
+   다른환경에 다른Bean 등록시에도 사용
+   EX) @Profile("local") 등
+

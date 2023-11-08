@@ -18,7 +18,7 @@ public class ItemServiceApplication {
 	}
 
 	@Bean
-	@Profile("local")
+	@Profile("local") // profile이 local일 때 활성화 된다.
 	public TestDataInit testDataInit(ItemRepository itemRepository) {
 		return new TestDataInit(itemRepository);
 	}
