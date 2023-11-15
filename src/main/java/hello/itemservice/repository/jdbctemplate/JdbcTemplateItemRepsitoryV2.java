@@ -18,6 +18,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.util.StringUtils;
@@ -44,7 +45,7 @@ public class JdbcTemplateItemRepsitoryV2 implements ItemRepository {
     public Item save(Item item) {
         String sql = "insert into item(item_name, price, quantity) values (:itemName, :price, :quantity)";
 
-        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(
+        SqlParameterSource param = new BeanPropertySqlParameterSource(
                 item);
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -59,7 +60,7 @@ public class JdbcTemplateItemRepsitoryV2 implements ItemRepository {
     public void update(Long itemId, ItemUpdateDto updateParam) {
         String sql = "update item set item_name=:itemName, price=:price, quantity=:quantity where id=:id";
 
-        MapSqlParameterSource param = new MapSqlParameterSource()
+        SqlParameterSource param = new MapSqlParameterSource()
                 .addValue("itemName", updateParam.getItemName())
                 .addValue("price", updateParam.getPrice())
                 .addValue("quantity", updateParam.getQuantity())
@@ -85,7 +86,7 @@ public class JdbcTemplateItemRepsitoryV2 implements ItemRepository {
         String itemName = cond.getItemName();
         Integer maxPrice = cond.getMaxPrice();
 
-        BeanPropertySqlParameterSource param = new BeanPropertySqlParameterSource(
+        SqlParameterSource param = new BeanPropertySqlParameterSource(
                 cond);
 
         String sql = "select id, item_name, price, quantity from item";
