@@ -18,3 +18,9 @@
    EX) @Profile("local") 등
 
 섹션2) 데이터 접근 기술 - 스프링 JdbcTemplate     -----------------------------------------------------------------------------------------------
+[JdbcTemplate 기능 정리]
+1. JdbcTemplate : 순서 기반의 파라미터 바인딩 지원
+2. NamedParameterJdbcTemplate : 이름 기반 파라미터 바인딩 지원 (권장)
+3. SimpleJdbcInser : INSERT SQL을 편리하게 사용할 수 있다.
+4. SimpleJdbcCall : 스토어드 프로시저를 편리하게 호출할 수 있다.
+
