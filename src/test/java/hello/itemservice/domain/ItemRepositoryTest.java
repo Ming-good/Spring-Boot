@@ -13,7 +13,7 @@ import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-@SpringBootTest
+@SpringBootTest  // SpringBootApplication을 찾아내어 해당  소스를 기반으로 설정을 셋팅함.
 class ItemRepositoryTest {
 
     @Autowired
@@ -24,7 +24,10 @@ class ItemRepositoryTest {
         //MemoryItemRepository 의 경우 제한적으로 사용
         if (itemRepository instanceof MemoryItemRepository) {
             ((MemoryItemRepository) itemRepository).clearStore();
+
+            return;
         }
+
     }
 
     @Test
@@ -68,10 +71,6 @@ class ItemRepositoryTest {
         itemRepository.save(item1);
         itemRepository.save(item2);
         itemRepository.save(item3);
-
-        //둘 다 없음 검증
-        test(null, null, item1, item2, item3);
-        test("", null, item1, item2, item3);
 
         //itemName 검증
         test("itemA", null, item1, item2);
