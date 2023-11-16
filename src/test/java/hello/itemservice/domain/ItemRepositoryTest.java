@@ -24,7 +24,6 @@ class ItemRepositoryTest {
         //MemoryItemRepository 의 경우 제한적으로 사용
         if (itemRepository instanceof MemoryItemRepository) {
             ((MemoryItemRepository) itemRepository).clearStore();
-
             return;
         }
 
