@@ -1,32 +1,27 @@
 package hello.itemservice.domain;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
-import hello.itemservice.repository.memory.MemoryItemRepository;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import org.springframework.transaction.PlatformTransactionManager;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
-
-import static org.assertj.core.api.Assertions.assertThat;
-
+@Transactional // @Transactional 애노테이션은 테스트에 있으면 테스트를 트랜잭션 안에서 실행하고, 테스트가 끝나면 롤백시켜 버린다.
 @SpringBootTest  // SpringBootApplication을 찾아내어 해당  소스를 기반으로 설정을 셋팅함.
 class ItemRepositoryTest {
 
     @Autowired
     ItemRepository itemRepository;
-    @Autowired
+/*    @Autowired
     PlatformTransactionManager transactionManager;
-    TransactionStatus status;
+    TransactionStatus status;*/
 
-    @BeforeEach
+/*    @BeforeEach
     void beforeEach() {
         status = transactionManager.getTransaction(
                 new DefaultTransactionDefinition());
@@ -40,7 +35,7 @@ class ItemRepositoryTest {
             return;
         }
         transactionManager.rollback(status);
-    }
+    }*/
 
     @Test
     void save() {
