@@ -5,7 +5,9 @@ import static org.assertj.core.api.Assertions.assertThat;
 import hello.itemservice.repository.ItemRepository;
 import hello.itemservice.repository.ItemSearchCond;
 import hello.itemservice.repository.ItemUpdateDto;
+import hello.itemservice.repository.memory.MemoryItemRepository;
 import java.util.List;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -26,7 +28,7 @@ class ItemRepositoryTest {
         status = transactionManager.getTransaction(
                 new DefaultTransactionDefinition());
     }
-
+*/
     @AfterEach
     void afterEach() {
         //MemoryItemRepository 의 경우 제한적으로 사용
@@ -34,8 +36,8 @@ class ItemRepositoryTest {
             ((MemoryItemRepository) itemRepository).clearStore();
             return;
         }
-        transactionManager.rollback(status);
-    }*/
+//        transactionManager.rollback(status);
+    }
 
     @Test
     void save() {
